@@ -1,0 +1,11 @@
+{
+  "name": "WorkshopApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/packager/packager.js"
+  },
+  "dependencies": {
+    "react-native": "0.12.0"
+  }
+}
