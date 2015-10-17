@@ -1,7 +1,7 @@
 # React Native - Windows installation
 
   - Install NodeJS - https://nodejs.org/en/
-  - Install Java SDK - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+  - Install Java JDK - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
   - Install Android SDK - https://developer.android.com/sdk/index.html#Other
   - Configure HAXM on Windows - http://developer.android.com/tools/devices/emulator.html#vm-windows
   - Configure Emulator (go to AndroidSDK -> run AVD manager -> click new) - https://facebook.github.io/react-native/docs/android-setup.html#install-and-run-android-stock-emulator
