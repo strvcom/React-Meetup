@@ -1,4 +1,4 @@
-# Windows installation
+# React Native - Windows installation
 
   - Install NodeJS - https://nodejs.org/en/
   - Install Java SDK - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
