@@ -9,6 +9,6 @@
   - npm install -g react-native-cli
   - react-native init Chat
   - change package.json start: "node node_modules/react-native/packager/packager.js"
-  - start emulator
+  - start emulator (go to AndroidSDK -> run AVD manager -> Select an emulator -> Click on the play button)
   - run react-native run-android
   - run npm start
