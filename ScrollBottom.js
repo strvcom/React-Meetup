@@ -17,7 +17,7 @@ render() {
 	return(
 		<View ref="container" style={styles.container}>
 			<ScrollView ref="helperView">
-				<View ref="helperViewInner" style={[styles.container, {paddingBottom: 60}]}>
+				<View ref="helperViewInner" style={styles.container}>
 					<Messages data={this.state.data} />
 				</View>
 			</ScrollView>
