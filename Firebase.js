@@ -14,3 +14,7 @@ componentDidMount() {
 		});
 	});
 },
+
+addMessage(message) {
+  ref.push(message);
+},
