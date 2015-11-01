@@ -16,5 +16,16 @@ componentDidMount() {
 },
 
 addMessage(message) {
+  var messages = this.state.data;
+  var message = {
+    date: Firebase.ServerValue.TIMESTAMP,
+    content: message,
+    author: this.state.username
+  }
+
   ref.push(message);
+
+  this.setState({
+    data: messages
+  });
 },
