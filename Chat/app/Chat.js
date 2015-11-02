@@ -10,8 +10,11 @@ var {
   Text,
   View,
   ScrollView,
+  Platform,
   ActivityIndicatorIOS
 } = React;
+
+var ProgressBar = require('ProgressBarAndroid');
 
 var Firebase = require('firebase');
 var ref = new Firebase('https://rnchat.firebaseio.com/messages');
@@ -99,11 +102,11 @@ var Chat = React.createClass({
     if(this.state.isLoading) {
       return(
         <View style={styles.loadingWrapper}>
-          <ActivityIndicatorIOS
-            animating={true}
-            style={styles.spinner}
-            size="large"
-          />
+          {
+            Platform.OS === 'ios' ?
+            <ActivityIndicatorIOS animating={true} size="large" /> :
+            <ProgressBar styleAttr="Inverse" />
+          }
         </View>
       );
     } else {
