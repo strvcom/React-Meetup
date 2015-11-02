@@ -46,7 +46,7 @@ var Chat = React.createClass({
   },
   render() {
     return(
-      <View>
+      <View style={{flex: 1}}>
         <Messages data={data} />
         <Form add={this.addMessage} />
       </View>
