@@ -14,11 +14,14 @@ var {
 var Form = require('./components/Form');
 
 var Chat = React.createClass({
+  addMessage(message) {
+    console.log(message);
+  },
   render() {
     return (
       <View style={styles.container}>
         <Text>Component</Text>
-        <Form />
+        <Form add={this.addMessage} />
       </View>
     );
   }

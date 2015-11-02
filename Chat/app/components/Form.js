@@ -18,6 +18,9 @@ var Form = React.createClass({
       text: ''
     }
   },
+  _onPressButton() {
+    this.props.add(this.state.text);
+  },
   render() {
     return (
       <View style={styles.container}>
@@ -27,6 +30,7 @@ var Form = React.createClass({
           value={this.state.text}
         />
         <TouchableHighlight
+          underlayColor="#a41646"
           style={styles.button}
           onPress={this._onPressButton}>
           <Text style={styles.buttonText}>SEND</Text>
