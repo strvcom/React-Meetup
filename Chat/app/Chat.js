@@ -12,9 +12,12 @@ var {
 var Form = require('./components/Form');
 
 var Chat = React.createClass({
+  addMessage(message){
+    console.log(message);
+  },
   render() {
     return(
-      <Form />
+      <Form add={this.addMessage} />
     );
   }
 });

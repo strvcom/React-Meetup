@@ -18,7 +18,10 @@ var Form = React.createClass({
     }
   },
   _onPressButton() {
-    console.log('button pressed');
+    if(this.state.text) {
+      this.props.add(this.state.text);
+      this.setState({text: ''})
+    }
   },
   render() {
     return(
@@ -29,6 +32,7 @@ var Form = React.createClass({
           value={this.state.text}
         />
         <TouchableHighlight
+          underlayColor="#a41646"
           style={styles.button}
           onPress={this._onPressButton}>
           <Text style={styles.buttonText}>SEND</Text>
