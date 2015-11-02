@@ -9,6 +9,7 @@ var {
   StyleSheet,
   Text,
   View,
+  ScrollView
 } = React;
 
 var Firebase = require('firebase');
@@ -53,6 +54,21 @@ var Chat = React.createClass({
     }
   },
 
+  componentDidUpdate() {
+    setTimeout(()=>{
+      this.scrollBottom();
+    },200);
+  },
+
+  scrollBottom() {
+    this.refs.helperViewInner.measure((oxInner, oyInner, widthInner, heightInner) => {
+      this.refs.container.measure((ox, oy, width, height) => {
+        if (heightInner < height) return;
+        this.refs.helperView.scrollTo(heightInner - height + oyInner);
+      });
+    });
+  },
+
   componentDidMount() {
     ref.once('value', () => this.setState({isLoading: false}))
     this.childAdded = ref.on('child_added', (snapshot)=> {
@@ -78,10 +94,14 @@ var Chat = React.createClass({
     ref.push(message);
   },
   render() {
-    return (
-      <View style={styles.container}>
-        <Messages data={data} />
-        <Form add={this.addMessage} />
+    return(
+      <View ref="container" style={styles.container}>
+        <ScrollView ref="helperView">
+          <View ref="helperViewInner" style={styles.container}>
+            <Messages data={this.state.data} />
+          </View>
+        </ScrollView>
+        <Form ref="form" for="message" add={this.addMessage} />
       </View>
     );
   }
