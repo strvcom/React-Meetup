@@ -9,7 +9,8 @@ var {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  ActivityIndicatorIOS
 } = React;
 
 var Firebase = require('firebase');
@@ -49,7 +50,8 @@ var data = [
 var Chat = React.createClass({
   getInitialState() {
     return {
-      data: data,
+      data: [],
+      isLoading: true,
       username: 'Daniel Kijkov'
     }
   },
@@ -94,20 +96,37 @@ var Chat = React.createClass({
     ref.push(message);
   },
   render() {
-    return(
-      <View ref="container" style={styles.container}>
-        <ScrollView ref="helperView">
-          <View ref="helperViewInner" style={styles.container}>
-            <Messages data={this.state.data} />
-          </View>
-        </ScrollView>
-        <Form ref="form" for="message" add={this.addMessage} />
-      </View>
-    );
+    if(this.state.isLoading) {
+      return(
+        <View style={styles.loadingWrapper}>
+          <ActivityIndicatorIOS
+            animating={true}
+            style={styles.spinner}
+            size="large"
+          />
+        </View>
+      );
+    } else {
+      return(
+        <View ref="container" style={styles.container}>
+          <ScrollView ref="helperView">
+            <View ref="helperViewInner" style={styles.container}>
+              <Messages data={this.state.data} />
+            </View>
+          </ScrollView>
+          <Form ref="form" for="message" add={this.addMessage} />
+        </View>
+      );
+    }
   }
 });
 
 var styles = StyleSheet.create({
+  loadingWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     flex: 1
   }
