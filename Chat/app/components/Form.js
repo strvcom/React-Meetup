@@ -22,7 +22,7 @@ var Form = React.createClass({
   },
   render() {
     return(
-      <View>
+      <View style={styles.container}>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
@@ -39,8 +39,14 @@ var Form = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row'
+  },
   input: {
+    flex: 1,
     borderColor: 'red',
+    padding: 10,
+    backgroundColor: '#eee',
     height: 50
   },
   button: {
