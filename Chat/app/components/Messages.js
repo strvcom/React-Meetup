@@ -10,6 +10,8 @@ var {
   View,
 } = React;
 
+var moment = require('moment');
+
 var Messages = React.createClass({
   getInitialState(){
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -28,7 +30,7 @@ var Messages = React.createClass({
       <View style={styles.container}>
         <View style={styles.row}>
           <Text style={styles.author}>{author}</Text>
-          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.date}>{moment(date).fromNow()}</Text>
         </View>
         <Text style={styles.content}>{content}</Text>
       </View>
