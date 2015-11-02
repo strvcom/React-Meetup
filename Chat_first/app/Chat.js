@@ -51,8 +51,8 @@ var data = [
 var Chat = React.createClass({
   getInitialState() {
     return {
-      data: [],
-      isLoading: true,
+      data: data,
+      isLoading: false,
       username: 'Daniel Kijkov'
     }
   },
