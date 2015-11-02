@@ -19,12 +19,26 @@ var Messages = React.createClass({
       dataSource: ds,
     };
   },
+  renderRow(rowData){
+    var {
+      date,
+      author,
+      content
+    } = rowData;
+    return(
+      <View>
+        <Text>{author}</Text>
+        <Text>{date}</Text>
+        <Text>{content}</Text>
+      </View>
+    );
+  },
   render() {
     return(
       <ListView
         style={{flex: 1}}
         dataSource={this.state.dataSource.cloneWithRows(this.props.data)}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
+        renderRow={this.renderRow}
       />
     );
   }
