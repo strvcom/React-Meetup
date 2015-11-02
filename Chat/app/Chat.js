@@ -9,10 +9,12 @@ var {
   View,
 } = React;
 
+var Form = require('./components/Form');
+
 var Chat = React.createClass({
   render() {
     return(
-      <View />
+      <Form />
     );
   }
 });
