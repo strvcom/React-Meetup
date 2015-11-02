@@ -19,7 +19,12 @@ var Form = React.createClass({
     }
   },
   _onPressButton() {
-    this.props.add(this.state.text);
+    if(this.state.text) {
+      this.props.add(this.state.text);
+      this.setState({
+        text: ''
+      })
+    }
   },
   render() {
     return (
