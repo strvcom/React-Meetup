@@ -12,6 +12,7 @@ var {
 } = React;
 
 var Form = require('./components/Form');
+var Messages = require('./components/Messages');
 
 var Chat = React.createClass({
   addMessage(message) {
@@ -20,7 +21,7 @@ var Chat = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <Text>Component</Text>
+        <Messages />
         <Form add={this.addMessage} />
       </View>
     );
