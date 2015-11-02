@@ -2,12 +2,16 @@
 
 var React = require('react-native');
 
+var ProgressBar = require('ProgressBarAndroid');
+
 var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  ScrollView
+  Platform,
+  ScrollView,
+  ActivityIndicatorIOS
 } = React;
 
 var Firebase = require('firebase');
@@ -47,7 +51,8 @@ var data = [
 var Chat = React.createClass({
   getInitialState() {
     return {
-      data: data,
+      data: [],
+      isLoading: true,
       username: 'Daniel Kijkov'
     }
   },
@@ -88,20 +93,41 @@ var Chat = React.createClass({
     ref.push(message);
   },
   render() {
-    return(
-      <View ref="container" style={styles.container}>
-        <ScrollView ref="helperView">
-          <View ref="helperViewInner" style={styles.container, styles.outerContainer}>
-            <Messages data={this.state.data} />
-          </View>
-        </ScrollView>
-        <Form ref="form" for="message" add={this.addMessage} />
-      </View>
-    );
+    if(this.state.isLoading) {
+      return (
+        <View style={styles.loadingContainer}>
+          {
+             Platform.OS === 'ios' ?
+              <ActivityIndicatorIOS
+                animating={true}
+                style={styles.spinner}
+                size="large"
+              /> :
+              <ProgressBar styleAttr="Inverse" />
+          }
+        </View>
+      );
+    } else {
+      return(
+        <View ref="container" style={styles.container}>
+          <ScrollView ref="helperView">
+            <View ref="helperViewInner" style={styles.container, styles.outerContainer}>
+              <Messages data={this.state.data} />
+            </View>
+          </ScrollView>
+          <Form ref="form" for="message" add={this.addMessage} />
+        </View>
+      );
+    }
   }
 });
 
 var styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   outerContainer: {
     paddingBottom: 50,
   },
