@@ -45,7 +45,12 @@ var Form = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 50
   },
   input: {
     flex: 1,
