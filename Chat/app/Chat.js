@@ -43,8 +43,23 @@ var data = [
 ]
 
 var Chat = React.createClass({
+  getInitialState() {
+    return {
+      data: data
+    }
+  },
   addMessage(message) {
-    console.log(message);
+    var messages = this.state.data;
+
+    messages.push({
+      date: Date.now(),
+      author: 'Daniel Kijkov',
+      content: message
+    });
+
+    this.setState({
+      data: messages
+    })
   },
   render() {
     return (
