@@ -91,7 +91,7 @@ var Chat = React.createClass({
     return(
       <View ref="container" style={styles.container}>
         <ScrollView ref="helperView">
-          <View ref="helperViewInner" style={styles.container}>
+          <View ref="helperViewInner" style={styles.container, styles.outerContainer}>
             <Messages data={this.state.data} />
           </View>
         </ScrollView>
@@ -102,6 +102,9 @@ var Chat = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  outerContainer: {
+    paddingBottom: 50,
+  },
   container: {
     flex: 1
   }
