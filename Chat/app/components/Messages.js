@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 
+var moment = require('moment');
+
 var {
   AppRegistry,
   StyleSheet,
@@ -30,7 +32,7 @@ var Messages = React.createClass({
       <View style={styles.container}>
         <View style={styles.row}>
           <Text style={styles.author}>{author}</Text>
-          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.date}>{moment(date).fromNow()}</Text>
         </View>
         <Text style={styles.content}>{content}</Text>
       </View>

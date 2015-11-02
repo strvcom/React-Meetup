@@ -7,7 +7,11 @@ var {
   StyleSheet,
   Text,
   View,
+  ScrollView
 } = React;
+
+var Firebase = require('firebase');
+var ref = new Firebase('https://rnchat.firebaseio.com/messages');
 
 var Form = require('./components/Form');
 var Messages = require('./components/Messages');
@@ -41,17 +45,66 @@ var data = [
 ]
 
 var Chat = React.createClass({
-  addMessage(message){
-    console.log(message);
+  getInitialState() {
+    return {
+      data: data,
+      username: 'Daniel Kijkov'
+    }
+  },
+  componentDidUpdate() {
+    setTimeout(()=>{
+      this.scrollBottom();
+    },200);
+  },
+  scrollBottom() {
+    this.refs.helperViewInner.measure((oxInner, oyInner, widthInner, heightInner) => {
+      this.refs.container.measure((ox, oy, width, height) => {
+        if (heightInner < height) return;
+        this.refs.helperView.scrollTo(heightInner - height + oyInner);
+      });
+    });
+  },
+  componentDidMount() {
+    ref.once('value', () => this.setState({isLoading: false}))
+    this.childAdded = ref.on('child_added', (snapshot)=> {
+      console.log('child_added');
+      var messages = this.state.data;
+      var message = snapshot.val();
+
+      messages.push(message);
+
+      this.setState({
+        data: messages
+      });
+    });
+  },
+  addMessage(message) {
+    var messages = this.state.data;
+    var message = {
+      date: Firebase.ServerValue.TIMESTAMP,
+      content: message,
+      author: this.state.username
+    }
+    ref.push(message);
   },
   render() {
     return(
-      <View style={{flex: 1}}>
-        <Messages data={data} />
-        <Form add={this.addMessage} />
+      <View ref="container" style={styles.container}>
+        <ScrollView ref="helperView">
+          <View ref="helperViewInner" style={styles.container}>
+            <Messages data={this.state.data} />
+          </View>
+        </ScrollView>
+        <Form ref="form" for="message" add={this.addMessage} />
       </View>
     );
   }
 });
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})
 
 module.exports = Chat;
