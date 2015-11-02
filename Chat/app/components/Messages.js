@@ -25,11 +25,14 @@ var Messages = React.createClass({
       author,
       content
     } = rowData;
+
     return(
-      <View>
-        <Text>{author}</Text>
-        <Text>{date}</Text>
-        <Text>{content}</Text>
+      <View style={styles.container}>
+        <View style={styles.row}>
+          <Text style={styles.author}>{author}</Text>
+          <Text style={styles.date}>{date}</Text>
+        </View>
+        <Text style={styles.content}>{content}</Text>
       </View>
     );
   },
@@ -45,6 +48,27 @@ var Messages = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    borderColor: '#eee',
+    borderBottomWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 15
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 5
+  },
+  author: {
+    flex: 1,
+    fontWeight: 'bold',
+    color: '#c81b55'
+  },
+  date: {
+    color: '#666'
+  },
+  content: {
+
+  }
 });
 
 module.exports = Messages;
