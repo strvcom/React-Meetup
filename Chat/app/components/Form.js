@@ -37,10 +37,27 @@ var Form = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row'
+  },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
+    flex: 1,
+    height: 50,
+    backgroundColor: '#ccc',
+    padding: 10
+  },
+  button: {
+    width: 80,
+    height: 50,
+    backgroundColor: '#c81b55',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 0.5
   }
 });
 
