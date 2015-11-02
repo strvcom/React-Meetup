@@ -44,10 +44,17 @@ var styles = StyleSheet.create({
     height: 50
   },
   button: {
-
+    backgroundColor: '#c81b55',
+    width: 80,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
-
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 0.5
   }
 });
 
