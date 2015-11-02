@@ -11,6 +11,9 @@ var {
   View,
 } = React;
 
+var Firebase = require('firebase');
+var ref = new Firebase('https://rnchat.firebaseio.com/messages');
+
 var Form = require('./components/Form');
 var Messages = require('./components/Messages');
 
@@ -45,21 +48,34 @@ var data = [
 var Chat = React.createClass({
   getInitialState() {
     return {
-      data: data
+      data: data,
+      username: 'Daniel Kijkov'
     }
   },
+
+  componentDidMount() {
+    ref.once('value', () => this.setState({isLoading: false}))
+    this.childAdded = ref.on('child_added', (snapshot)=> {
+      var messages = this.state.data;
+      var message = snapshot.val();
+
+      messages.push(message);
+
+      this.setState({
+        data: messages
+      });
+    });
+  },
+
   addMessage(message) {
     var messages = this.state.data;
+    var message = {
+      date: Firebase.ServerValue.TIMESTAMP,
+      content: message,
+      author: this.state.username
+    }
 
-    messages.push({
-      date: Date.now(),
-      author: 'Daniel Kijkov',
-      content: message
-    });
-
-    this.setState({
-      data: messages
-    })
+    ref.push(message);
   },
   render() {
     return (

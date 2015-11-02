@@ -33,6 +33,7 @@ var Form = React.createClass({
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
+          placeholder="Type a message"
         />
         <TouchableHighlight
           underlayColor="#a41646"
