@@ -10,8 +10,9 @@ import getRoutes from './routes'
 
 import { syncHistoryWithStore } from 'react-router-redux'
 import createHistory from 'react-router/lib/createMemoryHistory'
-import { match, RouterContext } from 'react-router'
+import { match } from 'react-router'
 import { Provider } from 'react-redux'
+import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 
 const app = new Express()
 
@@ -43,16 +44,18 @@ app.use((req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      const component = (
-        <Provider store={store} key="provider">
-          <RouterContext {...renderProps} />
-        </Provider>
-      )
+      loadOnServer({ ...renderProps, store }).then(() => {
+        const component = (
+          <Provider store={store} key="provider">
+            <ReduxAsyncConnect {...renderProps} />
+          </Provider>
+        )
 
-      res.status(200)
+        res.status(200)
 
-      res.send('<!doctype html>\n' +
-        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />))
+        res.send('<!doctype html>\n' +
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />))
+      })
     } else {
       res.status(404).send('Not found')
     }

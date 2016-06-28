@@ -1,24 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { PlanetsListItem } from 'components'
-import { load } from 'redux/modules/planets'
 
 @connect(
   state => ({
     planets: state.planets
-  }),
-  { load }
+  })
 )
 export default class PlanetsList extends Component {
   static propTypes = {
     load: PropTypes.func.isRequired,
     planets: PropTypes.object.isRequired
-  }
-
-  componentDidMount() {
-    if (!this.props.planets.loaded) {
-      this.props.load()
-    }
   }
 
   render() {
