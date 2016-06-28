@@ -1,0 +1,6 @@
+export Home from './Home'
+export About from './About'
+export Contact from './Contact'
+export PlanetsList from './PlanetsList'
+export PlanetsDetail from './PlanetsDetail'
+export NotFound from './NotFound'

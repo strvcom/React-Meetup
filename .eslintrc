@@ -1,0 +1,84 @@
+{
+  "extends": [
+    "@strv/javascript/environments/nodejs/v6",
+    "@strv/javascript/environments/nodejs/best-practices",
+    "@strv/javascript/environments/nodejs/optional",
+    "@strv/javascript/environments/react/latest",
+    "@strv/javascript/environments/react/best-practices",
+    "@strv/javascript/coding-styles/base",
+    "@strv/javascript/coding-styles/react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "experimentalObjectRestSpread": true,
+    "modules": true
+  },
+  "parserOptions": {
+      "sourceType": "module"
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "array-callback-return": 0,
+    "arrow-body-style": 0,
+    "callback-return": 0,
+    "consistent-return": 0,
+    "eol-last": 1,
+    "global-require": 0,
+    "indent": [1, 2, { "SwitchCase": 1 }],
+    "no-alert": 0,
+    "no-console": 0,
+    "no-extra-parens": [2, "functions"],
+    "no-inline-comments": 0,
+    "no-mixed-operators": 1,
+    'max-lines': [1, {
+      max: 600,
+      skipBlankLines: true,
+      skipComments: true
+    }],
+    'rest-spread-spacing': [1, 'never'],
+    "no-invalid-this": 0,
+    "no-multiple-empty-lines": [1, {"max": 2}],
+    "no-process-env": 0,
+    "no-restricted-syntax": 0,
+    "no-return-assign": 0,
+    "no-trailing-spaces": 1,
+    "no-undefined": 0,
+    "no-underscore-dangle": 0,
+    "operator-linebreak": 0,
+    "prefer-template": 0,
+    "react/display-name": 0,
+    "react/no-danger": 0,
+    "react/prefer-stateless-function": 0,
+    "react/prop-types": [2, { "ignore": ["store", "params"], "customValidators": [] }],
+    "semi": [1, "never"],
+    "strict": 0,
+    "id-length": 0,
+    "no-sync": 0,
+    "max-len": 0,
+    "require-jsdoc": 0
+  },
+  "plugins": [
+    "react", "import"
+  ],
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": ["node_modules", "src"]
+    }
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true
+  }
+}
