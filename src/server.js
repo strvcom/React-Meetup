@@ -6,10 +6,12 @@ import config from './config'
 import createStore from './redux/create'
 import ApiClient from './helpers/ApiClient'
 import Html from './helpers/Html'
-// import getRoutes from './routes'
+import getRoutes from './routes'
 
 import { syncHistoryWithStore } from 'react-router-redux'
 import createHistory from 'react-router/lib/createMemoryHistory'
+import { match, RouterContext } from 'react-router'
+import { Provider } from 'react-redux'
 
 const app = new Express()
 
@@ -33,7 +35,28 @@ app.use((req, res) => {
     hydrateOnClient()
     return
   }
-  hydrateOnClient()
+
+
+  match({ history, routes: getRoutes(), location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      const component = (
+        <Provider store={store} key="provider">
+          <RouterContext {...renderProps} />
+        </Provider>
+      )
+
+      res.status(200)
+
+      res.send('<!doctype html>\n' +
+        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />))
+    } else {
+      res.status(404).send('Not found')
+    }
+  })
 })
 
 if (config.port) {
