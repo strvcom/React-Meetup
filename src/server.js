@@ -44,6 +44,7 @@ app.use((req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
+      console.log(renderProps)
       loadOnServer({ ...renderProps, store }).then(() => {
         const component = (
           <Provider store={store} key="provider">
@@ -51,7 +52,11 @@ app.use((req, res) => {
           </Provider>
         )
 
-        res.status(200)
+        const globalState = store.getState()
+
+        const isNotFound = renderProps.routes.some(route => route.status === 404) || (globalState.planets && globalState.planets.error && globalState.planets.error.statusCode === 404 )
+
+        res.status(isNotFound ? 404 : 200)
 
         res.send('<!doctype html>\n' +
           ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />))
