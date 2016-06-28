@@ -6,4 +6,5 @@ https://github.com/makeomatic/redux-connect/
 https://github.com/uniqpath/magic-window
 
 192.168.14.100:8888
-https://a93b604a.ngrok.io
+
+https://bc613d74.ngrok.io
