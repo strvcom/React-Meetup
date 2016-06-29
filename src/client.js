@@ -5,6 +5,7 @@ import ApiClient from './helpers/ApiClient'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Router, browserHistory } from 'react-router'
+import { ReduxAsyncConnect } from 'redux-connect'
 
 import getRoutes from './routes'
 
@@ -15,6 +16,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 const component = (
   <Router
+    render={props => <ReduxAsyncConnect {...props} />}
     history={history}
     routes={getRoutes()}
   />
