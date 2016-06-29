@@ -16,12 +16,6 @@ export default class PlanetsDetail extends Component {
     planets: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
-    if (!this.props.planets.detail[this.props.planetId]) {
-      this.props.loadDetail(this.props.planetId)
-    }
-  }
-
   render() {
     const {
       loading,
